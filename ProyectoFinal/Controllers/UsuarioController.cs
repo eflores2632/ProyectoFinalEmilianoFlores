@@ -28,7 +28,7 @@ namespace IntegrandoApi.Controllers
         {
             if (nombreusuario is null)
             {
-                return BadRequest();
+                return BadRequest("El nombre no puede estar vacio");
             }
             else
             {
@@ -43,15 +43,14 @@ namespace IntegrandoApi.Controllers
         [HttpPost]
         public ActionResult CrearUsuario([FromBody] Usuario user)
         {
-            try
+            if (this.Uservice.CrearUsuario(user))
             {
-                if (this.Uservice.CrearUsuario(user))
-                {
-                    return Ok();
-                }
                 return Ok();
             }
-            catch (Exception ex) { Console.WriteLine(ex.Message); return BadRequest(); }
+            else
+            {
+                return BadRequest("No se pudo crear el usuario");
+            }
         }
         [HttpPut]
         public ActionResult ModificarUsuario([FromBody] Usuario user)
@@ -62,7 +61,7 @@ namespace IntegrandoApi.Controllers
             }
             else
             {
-                return BadRequest();
+                return BadRequest("No se pudo modificar el usuario");
             }
         }
     }

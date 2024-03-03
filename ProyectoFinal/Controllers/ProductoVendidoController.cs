@@ -18,7 +18,7 @@ namespace IntegrandoApi.Controllers
         {
             if (idusuario < 0)
             {
-                return BadRequest();
+                return BadRequest("El id de usuario no puede ser negativo");
             }
             else
             {

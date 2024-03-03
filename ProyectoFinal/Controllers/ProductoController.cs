@@ -18,7 +18,7 @@ namespace IntegrandoApi.Controllers
         {
             if (idusuario < 0)
             {
-                return BadRequest();
+                return BadRequest("El id de usuario no puede ser nulo");
             }
             else
             {
@@ -28,15 +28,15 @@ namespace IntegrandoApi.Controllers
         [HttpPost]
         public ActionResult CrearProducto([FromBody] Producto product)
         {
-            try
+
+            if (this.Pservice.CrearProducto(product))
             {
-                if (this.Pservice.CrearProducto(product))
-                {
-                    return Ok();
-                }
                 return Ok();
             }
-            catch (Exception ex) { Console.WriteLine(ex.Message); return BadRequest(); }
+            else
+            {
+                return BadRequest("No se pudo crear el producto");
+            }
         }
         [HttpPut]
         public ActionResult ModificarProducto([FromBody] Producto product)
@@ -47,20 +47,27 @@ namespace IntegrandoApi.Controllers
             }
             else
             {
-                return BadRequest();
+                return BadRequest("No se pudo modificar el producto");
             }
         }
         [HttpDelete]
         [Route("{idproducto}")]
         public ActionResult EliminarProducto(int idproducto)
         {
-            if (this.Pservice.EliminarProducto(idproducto))
+            if (idproducto < 0)
             {
-                return Ok();
+                return BadRequest("El id del prducto no puede ser negativo");
             }
             else
             {
-                return BadRequest();
+                if (this.Pservice.EliminarProducto(idproducto))
+                {
+                    return Ok();
+                }
+                else
+                {
+                    return BadRequest("No se pudo eliminar el producto");
+                }
             }
         }
     }
