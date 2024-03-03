@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace IntegrandoApi.Controllers
 {
     [ApiController]
-    [Route("api/")]
+    [Route("api/Venta/")]
     public class VentaController : Controller
     {
         private VentaService Vservice;
@@ -13,63 +13,22 @@ namespace IntegrandoApi.Controllers
             this.Vservice = vservice;
         }
         [HttpGet]
-        [Route("obtenerventa/{id}")]
-        public ActionResult<Venta> ObtenerVenta(int id)
+        [Route("{idusuario}")]
+        public ActionResult<List<Venta>> ObtenerVentas(int idusuario)
         {
-            if (id < 0)
-            {
-                return BadRequest();
-            }
-            else
-            {
-                return this.Vservice.ObtenerVenta(id);
-            }
+            return this.Vservice.ListarVentas(idusuario);
         }
-        [HttpGet]
-        [Route("listarventas")]
-        public ActionResult<List<Venta>> ObtenerVentas()
-        {
-            return this.Vservice.ListarVentas();
-        }
+
         [HttpPost]
-        [Route("crearventa")]
-        public ActionResult CrearVenta([FromBody] Venta venta)
+        [Route("{idusuario}")]
+        public ActionResult CrearVenta(int idusuario, [FromBody] List<Producto> productos)
         {
             try
             {
-                if (this.Vservice.CrearVenta(venta))
-                {
-                    return Ok();
-                }
-                else { return BadRequest(); }
-            }
-            catch (Exception ex) { Console.WriteLine(ex.Message); return BadRequest(); }
-        }
-        [HttpPut]
-        [Route("modificarventa")]
-        public ActionResult ModificarVenta([FromBody] Venta venta)
-        {
-            if (this.Vservice.ModificarVenta(venta.Id, venta))
-            {
+                this.Vservice.CrearVenta(idusuario, productos);
                 return Ok();
             }
-            else
-            {
-                return BadRequest();
-            }
-        }
-        [HttpDelete]
-        [Route("eliminarventa/{id}")]
-        public ActionResult EliminarVenta(int id)
-        {
-            if (this.Vservice.EliminarVenta(id))
-            {
-                return Ok();
-            }
-            else
-            {
-                return BadRequest();
-            }
+            catch (Exception ex) { return BadRequest(ex.Message); }
         }
     }
 }

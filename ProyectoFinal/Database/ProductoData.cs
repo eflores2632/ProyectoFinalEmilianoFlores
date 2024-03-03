@@ -61,7 +61,7 @@ namespace IntegrandoApi.Database
             {
                 string query = "INSERT INTO Producto (Descripciones,Costo,PrecioVenta,Stock,IdUsuario) values (@descripciones,@costo,@precioVenta,@stock,@idUsuario)";
                 SqlCommand cmd = new SqlCommand(query, connection);
-                cmd.Parameters.AddWithValue("descripciones", producto.Descripcion);
+                cmd.Parameters.AddWithValue("descripciones", producto.Descripciones);
                 cmd.Parameters.AddWithValue("costo", producto.Costo);
                 cmd.Parameters.AddWithValue("precioVenta", producto.PrecioVenta);
                 cmd.Parameters.AddWithValue("stock", producto.Stock);
@@ -77,7 +77,7 @@ namespace IntegrandoApi.Database
                 string query = "UPDATE Producto SET Descripciones = @descripciones,Costo = @costo,PrecioVenta = @precioVenta,Stock = @stock,IdUsuario = @idUsuario WHERE id = @id";
                 SqlCommand cmd = new SqlCommand(query, connection);
                 cmd.Parameters.AddWithValue("id", id);
-                cmd.Parameters.AddWithValue("descripciones", producto.Descripcion);
+                cmd.Parameters.AddWithValue("descripciones", producto.Descripciones);
                 cmd.Parameters.AddWithValue("costo", producto.Costo);
                 cmd.Parameters.AddWithValue("precioVenta", producto.PrecioVenta);
                 cmd.Parameters.AddWithValue("stock", producto.Stock);

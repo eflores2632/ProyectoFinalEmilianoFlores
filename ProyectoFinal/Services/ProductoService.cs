@@ -10,6 +10,12 @@ namespace IntegrandoApi.Services
         {
             this.Pdata = pdata;
         }
+        public Producto? ObtenerProductoporid(int id)
+        {
+            List<Producto> productos = this.Pdata.ListarProductos();
+            Producto? productos_encontrado = productos.Find(product => product.Id == id);
+            return productos_encontrado;
+        }
         public List<Producto> ObtenerProducto(int idusuario)
         {
             List<Producto> productos = this.Pdata.ListarProductos();

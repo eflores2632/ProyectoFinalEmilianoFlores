@@ -61,6 +61,18 @@ namespace IntegrandoApi.Database
                 return cmd.ExecuteNonQuery() > 0;
             }
         }
+        public int CrearVentaConID(Venta venta)
+        {
+            using (SqlConnection connection = new SqlConnection(this.stringConnection))
+            {
+                string query = "INSERT INTO Venta (Comentarios,IdUsuario) OUTPUT INSERTED.ID values (@comentarios,@idusuario)";
+                SqlCommand cmd = new SqlCommand(query, connection);
+                cmd.Parameters.AddWithValue("comentarios", venta.Comentarios);
+                cmd.Parameters.AddWithValue("idusuario", venta.IdUsuario);
+                connection.Open();
+                return (Int32)cmd.ExecuteScalar();
+            }
+        }
         public bool ModificarVenta(int id, Venta venta)
         {
             using (SqlConnection connection = new SqlConnection(this.stringConnection))

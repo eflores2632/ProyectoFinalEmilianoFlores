@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace IntegrandoApi.Controllers
 {
     [ApiController]
-    [Route("api/")]
+    [Route("api/Producto/")]
     public class ProductoController : Controller
     {
         private ProductoService Pservice;
@@ -13,7 +13,7 @@ namespace IntegrandoApi.Controllers
             this.Pservice = pservice;
         }
         [HttpGet]
-        [Route("obtenerproducto/{idusuario}")]
+        [Route("{idusuario}")]
         public ActionResult<List<Producto>> ObtenerProducto(int idusuario)
         {
             if (idusuario < 0)
@@ -25,14 +25,7 @@ namespace IntegrandoApi.Controllers
                 return this.Pservice.ObtenerProducto(idusuario);
             }
         }
-        [HttpGet]
-        [Route("listarproductos")]
-        public ActionResult<List<Producto>> ObtenerProductos()
-        {
-            return this.Pservice.ListarProductos();
-        }
         [HttpPost]
-        [Route("crearproducto")]
         public ActionResult CrearProducto([FromBody] Producto product)
         {
             try
@@ -46,7 +39,6 @@ namespace IntegrandoApi.Controllers
             catch (Exception ex) { Console.WriteLine(ex.Message); return BadRequest(); }
         }
         [HttpPut]
-        [Route("modificarproducto")]
         public ActionResult ModificarProducto([FromBody] Producto product)
         {
             if (this.Pservice.ModificarProducto(product.Id, product))
@@ -59,10 +51,10 @@ namespace IntegrandoApi.Controllers
             }
         }
         [HttpDelete]
-        [Route("eliminarproducto/{id}")]
-        public ActionResult EliminarProducto(int id)
+        [Route("{idproducto}")]
+        public ActionResult EliminarProducto(int idproducto)
         {
-            if (this.Pservice.EliminarProducto(id))
+            if (this.Pservice.EliminarProducto(idproducto))
             {
                 return Ok();
             }

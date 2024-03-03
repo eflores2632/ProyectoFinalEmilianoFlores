@@ -75,3 +75,4 @@ C:\Users\Emi\Documents\GitHub\ProyectoFinalEmilianoFlores\ProyectoFinal\obj\Debu
 C:\Users\Emi\Documents\GitHub\ProyectoFinalEmilianoFlores\ProyectoFinal\obj\Debug\net6.0\ProyectoFinal.pdb
 C:\Users\Emi\Documents\GitHub\ProyectoFinalEmilianoFlores\ProyectoFinal\obj\Debug\net6.0\ProyectoFinal.genruntimeconfig.cache
 C:\Users\Emi\Documents\GitHub\ProyectoFinalEmilianoFlores\ProyectoFinal\obj\Debug\net6.0\ref\ProyectoFinal.dll
+C:\Users\Emi\Documents\GitHub\ProyectoFinalEmilianoFlores\ProyectoFinal\obj\Debug\net6.0\ProyectoFinal.sourcelink.json

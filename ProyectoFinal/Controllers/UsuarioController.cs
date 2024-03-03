@@ -36,13 +36,11 @@ namespace IntegrandoApi.Controllers
             }
         }
         [HttpGet]
-        [Route("listarusuarios")]
         public ActionResult<List<Usuario>> ObtenerUsuarios()
         {
             return this.Uservice.ListarUsuarios();
         }
         [HttpPost]
-        [Route("crearusuario")]
         public ActionResult CrearUsuario([FromBody] Usuario user)
         {
             try
@@ -56,23 +54,9 @@ namespace IntegrandoApi.Controllers
             catch (Exception ex) { Console.WriteLine(ex.Message); return BadRequest(); }
         }
         [HttpPut]
-        [Route("modificarusuario")]
         public ActionResult ModificarUsuario([FromBody] Usuario user)
         {
             if (this.Uservice.ModificarUsuario(user.Id, user))
-            {
-                return Ok();
-            }
-            else
-            {
-                return BadRequest();
-            }
-        }
-        [HttpDelete]
-        [Route("eliminarusuario/{id}")]
-        public ActionResult EliminarUsuario(int id)
-        {
-            if (this.Uservice.EliminarUsuario(id))
             {
                 return Ok();
             }
